@@ -1,0 +1,7 @@
+/venvs/
+/ssl/
+/.kiro/
+/logs/
+/py/
+/.cache/
+/.idea/
