@@ -10,6 +10,7 @@ sudo certbot certonly --standalone \
   -d dev-app.climingo.xyz \
   -d dev-api.climingo.xyz \
   -d api.climingo.xyz \
+  --expand \
   --non-interactive \
   --agree-tos \
   --email admin@climingo.xyz
