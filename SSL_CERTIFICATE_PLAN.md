@@ -161,15 +161,27 @@ crontab -l
 tail -f /Users/singco/dev/climingo/nginx/logs/cert-renew.log
 ```
 
+## 구현 완료
+
+### 완료된 작업
+- ✅ nginx.conf에 api.climingo.xyz HTTP → HTTPS 리다이렉트 추가
+- ✅ issue-cert.sh 스크립트 생성 (3개 도메인 인증서 발급)
+- ✅ check-dns.sh 스크립트 생성 (DNS 전파 확인)
+
+### 실행 방법
+```bash
+# 1. DNS 전파 확인
+./check-dns.sh
+
+# 2. 인증서 발급 (DNS 변경 후)
+./issue-cert.sh
+```
+
 ## 체크리스트
 
 ### DNS 변경 후
-- [ ] DNS 전파 확인 (`nslookup api.climingo.xyz`)
-- [ ] Nginx 컨테이너 중지
-- [ ] 3개 도메인 인증서 재발급
-- [ ] 인증서 파일 복사 및 권한 설정
-- [ ] nginx.conf 수정 (api.climingo.xyz 블록)
-- [ ] Nginx 컨테이너 재시작
+- [ ] DNS 전파 확인 (`./check-dns.sh`)
+- [ ] 3개 도메인 인증서 발급 (`./issue-cert.sh`)
 - [ ] 브라우저에서 인증서 확인
 
 ### 자동 갱신 설정
