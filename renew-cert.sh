@@ -32,6 +32,6 @@ sudo chmod 644 ./ssl/singco-de-fullchain.pem
 sudo chmod 600 ./ssl/singco-de-privkey.pem
 
 echo "Starting nginx container..."
-docker-compose up -d
+docker-compose up -d --build
 
 echo "Certificate renewal completed!"
