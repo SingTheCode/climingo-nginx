@@ -13,7 +13,7 @@ sudo certbot certonly --standalone \
   --expand \
   --non-interactive \
   --agree-tos \
-  --email admin@climingo.xyz
+  --email spiderq10@gmail.com
 
 echo "Copying climingo.xyz certificates..."
 sudo cp /etc/letsencrypt/live/dev-app.climingo.xyz/fullchain.pem ./ssl/letsencrypt-fullchain.pem
@@ -26,7 +26,7 @@ sudo certbot certonly --standalone \
   -d api-report.singco.de \
   --non-interactive \
   --agree-tos \
-  --email admin@singco.de
+  --email spiderq10@gmail.com
 
 echo "Copying singco.de certificates..."
 sudo cp /etc/letsencrypt/live/api-report.singco.de/fullchain.pem ./ssl/singco-fullchain.pem
@@ -34,14 +34,14 @@ sudo cp /etc/letsencrypt/live/api-report.singco.de/privkey.pem ./ssl/singco-priv
 sudo chmod 644 ./ssl/singco-fullchain.pem
 sudo chmod 644 ./ssl/singco-privkey.pem
 
-echo "Issuing certificate for api-chart.climingo.de..."
+echo "Issuing certificate for api-chart.singco.de..."
 sudo certbot certonly --standalone \
   -d api-chart.singco.de \
   --non-interactive \
   --agree-tos \
-  --email admin@climingo.de
+  --email spiderq10@gmail.com
 
-echo "Copying climingo.de certificates..."
+echo "Copying singco.de certificates..."
 sudo cp /etc/letsencrypt/live/api-chart.singco.de/fullchain.pem ./ssl/singco-de-fullchain.pem
 sudo cp /etc/letsencrypt/live/api-chart.singco.de/privkey.pem ./ssl/singco-de-privkey.pem
 sudo chmod 644 ./ssl/singco-de-fullchain.pem
