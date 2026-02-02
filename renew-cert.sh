@@ -25,6 +25,12 @@ sudo cp /etc/letsencrypt/live/api-report.singco.de/privkey.pem ./ssl/singco-priv
 sudo chmod 644 ./ssl/singco-fullchain.pem
 sudo chmod 600 ./ssl/singco-privkey.pem
 
+echo "Copying climingo.de certificates..."
+sudo cp /etc/letsencrypt/live/api-chart.climingo.de/fullchain.pem ./ssl/climingo-de-fullchain.pem
+sudo cp /etc/letsencrypt/live/api-chart.climingo.de/privkey.pem ./ssl/climingo-de-privkey.pem
+sudo chmod 644 ./ssl/climingo-de-fullchain.pem
+sudo chmod 600 ./ssl/climingo-de-privkey.pem
+
 echo "Starting nginx container..."
 docker-compose up -d
 
