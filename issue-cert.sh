@@ -1,29 +1,34 @@
-#!/bin/bash
+set -euo pipefail
 
-# Let's Encrypt 인증서 발급 스크립트
+CERT_NAME="climingo"   # 원하는 고정 이름
+EMAIL="spiderq10@gmail.com"
+SSL_DIR="./ssl"
+
+cleanup() {
+  echo "Starting nginx container..."
+  docker-compose up -d || true
+}
+trap cleanup EXIT
 
 echo "Stopping nginx container..."
 docker-compose down
 
-echo "Issuing certificate for climingo.xyz domains..."
+echo "Issuing certificate..."
 sudo certbot certonly --standalone \
+  --cert-name "$CERT_NAME" \
   -d dev-app.climingo.xyz \
   -d dev-api.climingo.xyz \
   -d api.climingo.xyz \
   -d api-report.singco.de \
   -d api-chart.singco.de \
-  --expand \
   --non-interactive \
   --agree-tos \
-  --email spiderq10@gmail.com
+  --email "$EMAIL"
 
 echo "Copying certificates..."
-sudo cp /etc/letsencrypt/live/dev-app.climingo.xyz/fullchain.pem ./ssl/letsencrypt-fullchain.pem
-sudo cp /etc/letsencrypt/live/dev-app.climingo.xyz/privkey.pem ./ssl/letsencrypt-privkey.pem
-sudo chmod 644 ./ssl/letsencrypt-fullchain.pem
-sudo chmod 604 ./ssl/letsencrypt-privkey.pem
+sudo mkdir -p "$SSL_DIR"
+sudo cp "/etc/letsencrypt/live/${CERT_NAME}/fullchain.pem" "${SSL_DIR}/letsencrypt-fullchain.pem"
+sudo cp "/etc/letsencrypt/live/${CERT_NAME}/privkey.pem"   "${SSL_DIR}/letsencrypt-privkey.pem"
 
-echo "Starting nginx container..."
-docker-compose up -d
-
-echo "Certificate issuance completed!"
+# 권한은 'nginx 컨테이너가 읽을 수 있는 사용자/그룹'에 맞춰야 함
+sudo chmod 640 "${SSL_DIR}/letsencrypt-fullchain.pem" "${SSL_DIR}/letsencrypt-privkey.pem"
